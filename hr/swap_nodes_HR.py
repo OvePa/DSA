@@ -170,7 +170,9 @@ class TreeNode:
         self.right = None
 
 
+# Define a function to swap nodes in a binary tree based on specified queries
 def swapNodes(indexes, queries):
+    # Define a helper function for in-order traversal
     def inorder(node, result):
         if node is None:
             return
@@ -178,33 +180,54 @@ def swapNodes(indexes, queries):
         result.append(node.value)
         inorder(node.right, result)
 
+    # Define a helper function to swap nodes at specific depths
     def swap(node, depth, target_depth):
         if node is None:
-            return
+            return  # If the current node is None, exit the function
+
+        # Recursively swap nodes in the left and right subtrees
         swap(node.left, depth + 1, target_depth)
         swap(node.right, depth + 1, target_depth)
+
+        # Check if the current node's depth is a multiple of the target depth
         if depth % target_depth == 0:
+            # Swap the left and right children of the current node
             node.left, node.right = node.right, node.left
 
-    root = TreeNode(1)
-    queue = [root]
+    # The swap function performs a recursive depth-first traversal of the
+    # binary tree.
+    # When the depth of a node matches the target depth, it swaps the left and
+    # right children.
+
+    root = TreeNode(1)  # Create the root node with a value of 1
+    queue = [root]  # Initialize a queue with the root node
+
+    # Iterate through the indexes list to construct the binary tree
     for left, right in indexes:
-        current = queue.pop(0)
+        current = queue.pop(0)  # Get the front node from the queue
+
+        # Check and create the left child if it's not -1
         if left != -1:
             current.left = TreeNode(left)
-            queue.append(current.left)
+            queue.append(current.left)  # Enqueue the left child for further
+            # processing
+
+        # Check and create the right child if it's not -1
         if right != -1:
             current.right = TreeNode(right)
-            queue.append(current.right)
+            queue.append(current.right)  # Enqueue the right child for further
+            # processing
 
-    results = []
+    results = []  # List to store the results of in-order traversal for each query
     for query in queries:
-        swap(root, 1, query)
-        result = []
-        inorder(root, result)
-        results.append(result)
+        swap(root, 1, query)  # Swap nodes according to the current query
+        result = []  # List to store the in-order traversal result for the current query
+        inorder(root, result)  # Perform in-order traversal and populate the result list
+        results.append(
+            result
+        )  # Append the result of the current query to the results list
 
-    return results
+    return results  # Return the list of in-order traversal results for each query
 
 
 if __name__ == "__main__":

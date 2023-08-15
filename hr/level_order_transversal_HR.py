@@ -69,8 +69,45 @@ class BinarySearchTree:
                     break
 
 
-def preOrder(root):
-    pass
+# Import the 'collections' module to use the 'deque' data structure
+import collections
+
+
+# Define a function to perform level order traversal of a binary tree
+def levelOrder(root):
+    if not root:
+        return  # If the tree is empty, exit the function
+
+    # Create a deque (double-ended queue) to hold nodes for traversal
+    nodes = collections.deque([root])
+    currentCount = 1  # Counter for the current level's nodes
+    nextCount = 0  # Counter for the next level's nodes
+
+    # Perform the level order traversal using a while loop
+    while len(nodes) != 0:
+        currentNode = nodes.popleft()  # Get the node at the front of the deque
+        currentCount -= 1  # Decrease the count of remaining nodes at the current level
+        print(currentNode.info, end=" ")  # Print the value of the current node
+
+        # Enqueue the left child of the current node if it exists
+        if currentNode.left:
+            nodes.append(currentNode.left)
+            nextCount += 1
+
+        # Enqueue the right child of the current node if it exists
+        if currentNode.right:
+            nodes.append(currentNode.right)
+            nextCount += 1
+
+        # Check if all nodes at the current level have been processed
+        if currentCount == 0:
+            currentCount, nextCount = nextCount, currentCount
+            # Swap the counters to move to the next level
+
+
+# This function performs a level order traversal of a binary tree,
+# visiting nodes level by level from left to right.
+# It prints the values of the nodes in the order they are encountered.
 
 
 if __name__ == "__main__":

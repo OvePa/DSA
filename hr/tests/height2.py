@@ -5,19 +5,18 @@ class TreeNode:
         self.right = None
 
 
-def postOrder(root):
+def getHeight(root):
     if root is None:
-        return
-    postOrder(root.left)
-    postOrder(root.right)
-    print(root.value, end=" ")
+        return -1
+    left_height = getHeight(root.left)
+    right_height = getHeight(root.right)
+    return max(left_height, right_height) + 1
 
 
-# Example usage
 root = TreeNode(1)
 root.left = TreeNode(2)
 root.right = TreeNode(3)
 root.left.left = TreeNode(4)
 root.left.right = TreeNode(5)
 
-postOrder(root)  # Output: 4 5 2 3 1
+print(getHeight(root))

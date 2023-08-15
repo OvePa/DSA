@@ -84,35 +84,49 @@ class BinarySearchTree:
                     break
 
 
+# Define a function to print the top view of a binary tree
 def topView(root):
     if root is None:
-        return
+        return  # If the tree is empty, exit the function
 
-    # Define a class to store the node and its horizontal distance
+    # Define a class to represent nodes in the queue along with their distances
+    # from the root
     class QueueNode:
         def __init__(self, node, distance):
             self.node = node
             self.distance = distance
 
-    # Initialize a dictionary to store the top view nodes
-    top_view = {}
+    top_view = {}  # Dictionary to store the top view of the tree
 
-    # Initialize a queue for level order traversal
-    queue = [QueueNode(root, 0)]
+    queue = [
+        QueueNode(root, 0)
+    ]  # Initialize the queue with the root node and its distance from the root
 
+    # Perform a level order traversal to find the top view of the tree
     while queue:
-        current = queue.pop(0)
+        current = queue.pop(0)  # Get the front node from the queue
+
+        # Check if the current distance is not already in the top view dictionary
         if current.distance not in top_view:
+            # Add the current node's value to the top view dictionary
             top_view[current.distance] = current.node.info
 
+        # Enqueue the left child if it exists along with its updated distance
         if current.node.left:
             queue.append(QueueNode(current.node.left, current.distance - 1))
+
+        # Enqueue the right child if it exists along with its updated distance
         if current.node.right:
             queue.append(QueueNode(current.node.right, current.distance + 1))
 
-    # Print the top view nodes in order of horizontal distance
+    # Print the top view nodes in sorted order of distances
     for distance in sorted(top_view.keys()):
         print(top_view[distance], end=" ")
+
+
+# This function prints the top view of a binary tree, which consists of the
+# nodes visible when looking at the tree from the top.
+# Nodes are printed in the order of their vertical distance from the root node.
 
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
 """
-Complete the inOrder function which has  parameter: a pointer to the root of a binary tree. It must print the values in the tree's inorder traversal as a single line of space-separated values.
+Complete the postOrder function which has  parameter: a pointer to the root of a binary tree. It must print the values in the tree's postorder traversal as a single line of space-separated values.
 
 Input Format
 
-Our test code passes the root node of a binary tree to the inOrder function.
+Our test code passes the root node of a binary tree to the postOrder function.
 
 Output Format
 
@@ -22,10 +22,10 @@ Sample Input
          4
 Sample Output
 
-1 2 3 4 5 6
+4 3 6 5 2 1
 Explanation
 
-The tree's inorder traversal results in  1 2 3 4 5 6 as the required result.
+The postorder traversal is shown.
 """
 
 
@@ -67,12 +67,23 @@ class BinarySearchTree:
                     break
 
 
-def inOrder(root):
+# Define a function to perform a post-order traversal of a binary tree
+def postOrder(root):
     if root is None:
-        return
-    inOrder(root.left)
+        return  # If the current node is None, return and exit the function
+
+    postOrder(root.left)  # Recursively traverse the left subtree
+    postOrder(root.right)  # Recursively traverse the right subtree
+
+    # Print the value of the current node followed by a space, using 'end=" "'
+    # to print on the same line
     print(root.info, end=" ")
-    inOrder(root.right)
+
+
+# This function performs a post-order traversal, visiting nodes in the order of
+# left subtree, right subtree, and then the current node.
+# It prints the values of the nodes in a sequence that is useful for deleting
+# nodes in a tree.
 
 
 if __name__ == "__main__":
@@ -84,4 +95,4 @@ if __name__ == "__main__":
     for i in range(t):
         tree.create(arr[i])
 
-    inOrder(tree.root)
+    postOrder(tree.root)

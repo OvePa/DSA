@@ -13,11 +13,10 @@ def preOrder(root):
     preOrder(root.right)
 
 
-# Example usage
 root = TreeNode(1)
 root.left = TreeNode(2)
 root.right = TreeNode(3)
 root.left.left = TreeNode(4)
 root.left.right = TreeNode(5)
 
-preOrder(root)  # Output: 1 2 4 5 3
+preOrder(root)

@@ -45,10 +45,8 @@ def swapNodes(indexes, queries):
 if __name__ == "__main__":
     indexes = [[2, 3], [-1, -1], [-1, -1]]  # 2
     queries = [1, 1]
-    # swapNodes(indexes, queries)
     indexes2 = [[2, 3], [-1, 4], [-1, 5], [-1, -1], [-1, -1]]  # 2  # 3  # 3
     queries2 = [2]
-    # swapNodes(indexes2, queries2)
     indexes3 = [
         [2, 3],  # i + 2
         [4, -1],  # i + 3

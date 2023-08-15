@@ -67,12 +67,23 @@ class BinarySearchTree:
                     break
 
 
+# Define a function to perform a pre-order traversal of a binary tree
 def preOrder(root):
     if root is None:
-        return
+        return  # If the current node is None, return and exit the function
+
+    # Print the value of the current node followed by a space, using 'end=" "'
+    # to print on the same line
     print(root.info, end=" ")
-    preOrder(root.left)
-    preOrder(root.right)
+
+    preOrder(root.left)  # Recursively traverse the left subtree
+    preOrder(root.right)  # Recursively traverse the right subtree
+
+
+# This function performs a pre-order traversal, visiting nodes in the order of
+# the current node, left subtree, and then right subtree.
+# It prints the values of the nodes in a sequence that is useful for creating
+# a copy of the tree.
 
 
 if __name__ == "__main__":

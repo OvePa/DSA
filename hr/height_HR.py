@@ -65,12 +65,27 @@ class BinarySearchTree:
                     break
 
 
+# Define a function to calculate the height of a binary tree
 def height(root):
     if root is None:
-        return -1  # Height of an empty tree is -1
+        return -1  # If the current node is None, return -1 to account for the
+        # base case of an empty tree
+
+    # Recursively calculate the height of the left subtree
     left_height = height(root.left)
+
+    # Recursively calculate the height of the right subtree
     right_height = height(root.right)
+
+    # Return the maximum height between the left and right subtrees,
+    # plus 1 for the current node
     return max(left_height, right_height) + 1
+
+
+# This function calculates the height of a binary tree, which is the maximum
+# number of edges between the root and a leaf node.
+# The height of an empty tree is -1, and the height of a tree with just the
+# root is 0.
 
 
 if __name__ == "__main__":
