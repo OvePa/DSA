@@ -41,9 +41,9 @@ def getRightChild(root):
 
 
 if __name__ == "__main__":
-    r = BinaryTree(3)
+    r = BinaryTree(1)
     print(r)
-    print(insertLeft(r, 4))
+    print(insertLeft(r, 2))
     print(insertLeft(r, 5))
     print(insertRight(r, 6))
     print(insertRight(r, 7))
