@@ -1,5 +1,35 @@
 import collections
 
+"""
+Complete the preOrder function which has  parameter: a pointer to the root of a binary tree. It must print the values in the tree's preorder traversal as a single line of space-separated values.
+
+Input Format
+
+Our test code passes the root node of a binary tree to the preOrder function.
+
+Output Format
+
+Print the tree's preorder traversal as a single line of space-separated values.
+
+Sample Input
+
+     1
+      \
+       2
+        \
+         5
+        /  \
+       3    6
+        \
+         4
+Sample Output
+
+1 2 5 3 4 6
+Explanation
+
+The preorder traversal of the binary tree is printed.
+"""
+
 
 class Node:
     def __init__(self, info):
@@ -39,42 +69,17 @@ class BinarySearchTree:
                     break
 
 
-def levelOrder(root):
-    # Write your code here
-    if not root:
-        return
-
-    nodes = collections.deque([root])
-
-    currentCount = 1
-    nextCount = 0
-
-    while len(nodes) != 0:
-        currentNode = nodes.popleft()
-        currentCount -= 1
-
-        print(currentNode.info, end=" ")
-
-        if currentNode.left:
-            nodes.append(currentNode.left)
-            nextCount += 1
-
-        if currentNode.right:
-            nodes.append(currentNode.right)
-            nextCount += 1
-
-        if currentCount == 0:
-            # print("\n")
-            currentCount, nextCount = nextCount, currentCount
+def preOrder(root):
+    pass
 
 
 if __name__ == "__main__":
     tree = BinarySearchTree()
-    t = int(input("> "))
+    t = int(input("Number of Nodes: "))
 
-    arr = list(map(int, input("> ").split()))
+    arr = list(map(int, input("Array: ").split()))
 
     for i in range(t):
         tree.create(arr[i])
 
-    levelOrder(tree.root)
+    preOrder(tree.root)
