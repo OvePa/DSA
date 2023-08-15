@@ -1,11 +1,9 @@
-import collections
-
 """
-Complete the preOrder function which has  parameter: a pointer to the root of a binary tree. It must print the values in the tree's preorder traversal as a single line of space-separated values.
+Complete the inOrder function which has  parameter: a pointer to the root of a binary tree. It must print the values in the tree's inorder traversal as a single line of space-separated values.
 
 Input Format
 
-Our test code passes the root node of a binary tree to the preOrder function.
+Our test code passes the root node of a binary tree to the inOrder function.
 
 Output Format
 
@@ -24,10 +22,10 @@ Sample Input
          4
 Sample Output
 
-1 2 5 3 4 6
+1 2 3 4 5 6
 Explanation
 
-The preorder traversal of the binary tree is printed.
+The tree's inorder traversal results in  1 2 3 4 5 6 as the required result.
 """
 
 
@@ -69,8 +67,12 @@ class BinarySearchTree:
                     break
 
 
-def preOrder(root):
-    pass
+def inOrder(root):
+    if root is None:
+        return
+    inOrder(root.left)
+    print(root.info, end=" ")
+    inOrder(root.right)
 
 
 if __name__ == "__main__":
@@ -82,4 +84,4 @@ if __name__ == "__main__":
     for i in range(t):
         tree.create(arr[i])
 
-    preOrder(tree.root)
+    inOrder(tree.root)
