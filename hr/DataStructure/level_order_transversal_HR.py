@@ -119,4 +119,4 @@ if __name__ == "__main__":
     for i in range(t):
         tree.create(arr[i])
 
-    preOrder(tree.root)
+    levelOrder(tree.root)

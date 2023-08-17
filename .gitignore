@@ -2,5 +2,4 @@ venv/
 .idea
 __pycache__/tree_traversal.cpython-310.pyc
 __pycache__
-prueba.py
-cgp.py
+P/

@@ -54,8 +54,14 @@ class BinarySearchTree:
             current = self.root  # Start at the root node
 
             while True:
+                # This checks if the value to be inserted (val) is less
+                # than the value of the current node (current.info).
                 if val < current.info:
+                    # This checks if the current node has a left child.
                     if current.left:
+                        # If there is a left child, move the current pointer to
+                        # the left child node. This allows the loop to continue
+                        # down the left subtree.
                         current = current.left
                     else:
                         current.left = Node(val)  # If there's no left child,

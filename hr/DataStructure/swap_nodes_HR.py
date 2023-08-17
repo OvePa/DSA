@@ -231,7 +231,7 @@ def swapNodes(indexes, queries):
 
 
 if __name__ == "__main__":
-    fptr = open("pruebas.txt", "w")
+    fptr = open("../pruebas.txt", "w")
 
     n = int(input("n > ").strip())
 
