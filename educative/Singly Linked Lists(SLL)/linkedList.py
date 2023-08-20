@@ -93,7 +93,7 @@ class LinkedList:
             counter += 1
             currentNode = currentNode.next_node
 
-        print(counter)
+        print("Length: ", counter)
         return counter
 
     def reverse(self):
@@ -111,6 +111,117 @@ class LinkedList:
 
             self.head_node = prevNode
         return self.head_node
+
+    def detect_loop(self):
+        if self.is_empty():
+            return False
+
+        one_step = self.get_head()
+        two_step = self.get_head()
+
+        while one_step and two_step and two_step.next_node:
+            one_step = one_step.next_node
+            two_step = two_step.next_node.next_node
+            if one_step == two_step:
+                return True
+
+        return False
+
+    def find_mid(self):
+        length = self.length()
+        counter = 0
+        if length % 2 == 1:
+            counter = length // 2
+        else:
+            counter = (length / 2) - 1
+
+        currentNode = self.get_head()
+        while currentNode:
+            if counter == 0:
+                print(currentNode.val)
+                return currentNode.val
+            counter -= 1
+            currentNode = currentNode.next_node
+
+    def remove_duplicates(self):
+        if self.is_empty():
+            return None
+
+        if self.get_head().next_node is None:
+            return self
+
+        outer_node = self.get_head()
+        while outer_node:
+            inner_node = outer_node
+            while inner_node:
+                if inner_node.next_node:
+                    if outer_node.val == inner_node.next_node.val:
+                        new_next_node = inner_node.next_node.next_node
+                        inner_node.next_node = new_next_node
+                    else:
+                        inner_node = inner_node.next_node
+                else:
+                    inner_node = inner_node.next_node
+            outer_node = outer_node.next_node
+        return self
+
+    def union(self, list2):
+        if self.is_empty():
+            return list2
+        elif list2.is_empty():
+            return self
+
+        l1 = self.get_head()
+        l2 = list2.get_head()
+
+        while l1.next_node:
+            l1 = l1.next_node
+
+        l1.next_node = l2
+
+        print("Union:")
+        l1 = self.remove_duplicates()
+        return l1
+
+    def intersection(self, list2):
+        result = LinkedList()
+        visited_nodes = set()
+        current_node = self.get_head()
+
+        while current_node:
+            value = current_node.val
+            if value not in visited_nodes:
+                visited_nodes.add(value)
+            current_node = current_node.next_node
+
+        start = list2.get_head()
+
+        while start:
+            value = start.val
+            if value in visited_nodes:
+                result.insert_at_head(start.val)
+
+            start = start.next_node
+        result.remove_duplicates()
+        result.print_list()
+        return result
+
+    def find_nth(self, n):
+        # Write your code here
+        length = self.length()
+        if n > length:
+            return -1
+        else:
+            counter = length - n
+
+        currentNode = self.get_head()
+
+        while counter != 0:
+            currentNode = currentNode.next_node
+            counter -= 1
+
+        print("Value: ", currentNode.val)
+        return currentNode.val
 
     # Print
     def print_list(self):
@@ -182,7 +293,8 @@ if __name__ == "__main__":
         lst.insert_at_head(i)
     lst.print_list()
     print("Length: ", lst.length())
-    """
+
+    print("*" * 7)
     print("Reversed Linked List")
     lst = LinkedList()
     lst.print_list()
@@ -192,3 +304,104 @@ if __name__ == "__main__":
     lst.print_list()
     lst.reverse()
     lst.print_list()
+
+    print("*" * 7)
+
+    print("Floyd's cycle-finding algorithm")
+    lst = LinkedList()
+
+    lst.insert_at_head(21)
+    lst.insert_at_head(14)
+    lst.insert_at_head(7)
+
+    # Adding a loop
+    head = lst.get_head()
+    node = lst.get_head()
+
+    for i in range(4):
+        if node.next_node is None:
+            node.next_node = head.next_node
+            break
+        node = node.next_node
+
+    print(lst.detect_loop())
+
+    print("*" * 7)
+    print("Finding Mid!")
+    lst = LinkedList()
+    lst.print_list()
+    print("Inserting values in lists!")
+    for i in range(7):
+        lst.insert_at_tail(i + 1)
+
+    lst.print_list()
+    lst.find_mid()
+    print("*" * 7)
+
+    print("Removing Duplicates!")
+    lst = LinkedList()
+    lst.insert_at_head(7)
+    lst.insert_at_head(7)
+    lst.insert_at_head(7)
+    lst.insert_at_head(22)
+    lst.insert_at_head(14)
+    lst.insert_at_head(21)
+    lst.insert_at_head(14)
+    lst.insert_at_head(7)
+
+    lst.print_list()
+    lst.remove_duplicates()
+    lst.print_list()
+
+    print("*" * 7)
+    print("Union!")
+    lst = LinkedList()
+    lst.print_list()
+    print("Inserting values in list1!")
+    for i in range(5):
+        lst.insert_at_head(i)
+    lst.print_list()
+    print("*" * 7)
+
+    lst2 = LinkedList()
+    lst2.print_list()
+    print("Inserting values in list2!")
+    for i in range(5):
+        lst2.insert_at_tail(i + 3)
+    lst2.print_list()
+
+    lst.union(lst2)
+    lst.print_list()
+    print("*" * 7)
+    lst = LinkedList()
+    lst.print_list()
+    print("Inserting values in list 1!")
+    for i in range(5):
+        lst.insert_at_head(i)
+
+    lst2 = LinkedList()
+    lst2.print_list()
+    print("Inserting values in list2!")
+    for i in range(5):
+        lst2.insert_at_tail(i + 3)
+    print("Intersection!")
+    print("Lista 1")
+    lst.print_list()
+    print("Lista 2")
+    lst2.print_list()
+    lst.intersection(lst2)
+    print("*" * 7)
+    """
+
+    print("Find Nth!")
+    lst = LinkedList()
+    lst.print_list()
+    print("Inserting values in list!")
+    for i in range(10):
+        lst.insert_at_head(i + 1)
+
+    lst.print_list()
+    lst.find_nth(3)
+    print("*" * 7)
+
+

@@ -1,11 +1,5 @@
 from linkedList import Node, LinkedList
 
-# Access HeadNode => list.getHead()
-# Check if list is empty => list.isEmpty()
-# Node class  { int data ; Node nextElement;}
-
-# Inserts a value at the end of the list
-
 
 def insert_at_tail(lst, value):
     # Creating a new node
@@ -98,7 +92,103 @@ def delete(lst, value):
     return deleted
 
 
+# 1: Brute Force Method
+def find_mid(lst):
+    if lst.is_empty():
+        return None
+
+    node = lst.get_head()
+    mid = 0
+    if lst.length() % 2 == 0:
+        mid = lst.length() // 2
+    else:
+        mid = lst.length() // 2 + 1
+
+    for i in range(mid - 1):
+        node = node.next_node
+
+    return node.val
+
+
+# 2: Two Pointers
+def find_mid1(lst):
+    if lst.is_empty():
+        return -1
+    current_node = lst.get_head()
+    if current_node.next_node == None:
+        # Only 1 element exist in array so return its value.
+        return current_node.data
+
+    mid_node = current_node
+    current_node = current_node.next_node.next_node
+    print("Mid:", mid_node.val)
+    print("Current: ", current_node.val)
+    # Move mid_node (Slower) one step at a time
+    # Move current_node (Faster) two steps at a time
+    # When current_node reaches at end, mid_node will be at the middle of List
+    while current_node:
+        mid_node = mid_node.next_node
+        current_node = current_node.next_node
+        print("Mid:", mid_node.val)
+        print("Current: ", current_node.val)
+        if current_node:
+            current_node = current_node.next_node
+    if mid_node:
+        return mid_node.val
+    return -1
+
+
+# 1: Double Iteration
+def find_nth(lst, n):
+    if lst.is_empty():
+        return -1
+
+    # Find Length of list
+    length = lst.length() - 1
+
+    # Find the Node which is at (len - n + 1) position from start
+    current_node = lst.get_head()
+
+    position = length - n + 1
+
+    if position < 0 or position > length:
+        return -1
+
+    count = 0
+
+    while count is not position:
+        current_node = current_node.next_element
+        count += 1
+
+    if current_node:
+        return current_node.data
+    return -1
+
+
+# 2: Two Pointers
+def find_nth1(lst, n):
+    if lst.is_empty():
+        return -1
+
+    nth_node = lst.get_head()  # This iterator will reach the Nth node
+    end_node = lst.get_head()  # This iterator will reach the end of the list
+
+    count = 0
+    while count < n:
+        if end_node is None:
+            return -1
+        end_node = end_node.next_element
+        count += 1
+
+    while end_node is not None:
+        end_node = end_node.next_element
+        nth_node = nth_node.next_element
+
+    return nth_node.data
+
+
 if __name__ == "__main__":
+    """
     # Print
     lst = LinkedList()
     lst.print_list()
@@ -138,3 +228,50 @@ if __name__ == "__main__":
     lst.print_list()
     delete(lst, 4)
     lst.print_list()
+    """
+    # Find Mid
+    lst = LinkedList()
+    lst.insert_at_head(22)
+    lst.insert_at_head(21)
+    lst.insert_at_head(10)
+    lst.insert_at_head(14)
+    lst.insert_at_head(7)
+
+    lst.print_list()
+    print(find_mid(lst))
+    lst = LinkedList()
+    lst.insert_at_head(22)
+    lst.insert_at_head(21)
+    lst.insert_at_head(10)
+    lst.insert_at_head(14)
+    lst.insert_at_head(7)
+
+    lst.print_list()
+    print(find_mid1(lst))
+
+    # Find Nth
+    lst = LinkedList()
+    lst.insert_at_head(21)
+    lst.insert_at_head(14)
+    lst.insert_at_head(7)
+    lst.insert_at_head(8)
+    lst.insert_at_head(22)
+    lst.insert_at_head(15)
+
+    lst.print_list()
+    print(find_nth(lst, 5))
+    print(find_nth(lst, 1))
+    print(find_nth(lst, 10))
+
+    lst = LinkedList()
+    lst.insert_at_head(21)
+    lst.insert_at_head(14)
+    lst.insert_at_head(7)
+    lst.insert_at_head(8)
+    lst.insert_at_head(22)
+    lst.insert_at_head(15)
+
+    lst.print_list()
+
+    print(find_nth1(lst, 19))
+    print(find_nth1(lst, 5))
