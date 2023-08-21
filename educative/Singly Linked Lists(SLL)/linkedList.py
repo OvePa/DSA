@@ -403,5 +403,3 @@ if __name__ == "__main__":
     lst.print_list()
     lst.find_nth(3)
     print("*" * 7)
-
-
